@@ -37,6 +37,7 @@ const PRODUCTS = [
     name: 'Coconut Almond Crunch x10',
     flavor: 'flavor-coconut',
     image: 'images/coconut-almond.png',
+    image2: 'images/coconut-almond2.png',
     ingredients: 'coconut · dates · almonds',
     tagline: 'Rich almonds rolled in toasted coconut, sweetened only with dates.',
     description: 'A coconut base rolled in toasted almond pieces, sweetened only with dates — no refined sugar, no fillers.',
@@ -62,7 +63,7 @@ const PRODUCTS = [
     allergens: 'Contains peanuts. Made in a kitchen that also handles tree nuts.',
     storage: 'Store in a cool, dry place. Keeps fresh up to 2 weeks at room temperature, or a month refrigerated.',
     oldPrice: 129,
-    price: 99
+    price: 67
   }
   // {
   //   id: 'coconut-lime',
@@ -167,6 +168,13 @@ function isPlaceholderNumber() {
 // Returns either a real product photo or the illustrated speckled ball,
 // depending on whether this product has an "image" set.
 function buildVisualMarkup(product, sizeClass) {
+  if (product.image2) {
+    return `
+      <div class="product-swap">
+        <img src="${product.image}" alt="${product.name}" class="product-photo ${sizeClass}">
+        <img src="${product.image2}" alt="${product.name}" class="product-photo ${sizeClass} swap-in">
+      </div>`;
+  }
   if (product.image) {
     return `<img src="${product.image}" alt="${product.name}" class="product-photo ${sizeClass}">`;
   }
@@ -200,8 +208,17 @@ if (productGrid) {
     </article>
   `;
   setupReveal(productGrid);
+
+  productGrid.querySelectorAll('.product-swap').forEach(swap => {
+    let shown = false;
+    setInterval(() => {
+      shown = !shown;
+      swap.classList.toggle('is-active', shown);
+    }, 5000);
+  });
 }
 //<div class="ball ball-card flavor-matcha" aria-hidden="true"></div>
+
 
 /* ======================================================
    PRODUCT PAGE — render detail + quantity calculator
