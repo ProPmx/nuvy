@@ -217,7 +217,7 @@ if (productGrid) {
     setInterval(() => {
       shown = !shown;
       swap.classList.toggle('is-active', shown);
-    }, 4500);
+    }, 3000);
   });
 }
 //<div class="ball ball-card flavor-matcha" aria-hidden="true"></div>
@@ -307,25 +307,25 @@ if (productDetail) {
             <option value="Other">Other city</option>
           </select>
         </div>
+      </div>
 
-        <div class="product-extra">
-          <details>
-            <summary>Full ingredients</summary>
-            <p>${product.fullIngredients}</p>
-          </details>
-          <details>
-            <summary>Nutrition</summary>
-            <p>${product.nutrition}</p>
-          </details>
-          <details>
-            <summary>Allergens</summary>
-            <p>${product.allergens}</p>
-          </details>
-          <details>
-            <summary>Storage</summary>
-            <p>${product.storage}</p>
-          </details>
-        </div>
+      <div class="product-extra">
+        <details>
+          <summary>Full ingredients</summary>
+          <p>${product.fullIngredients}</p>
+        </details>
+        <details>
+          <summary>Nutrition</summary>
+          <p>${product.nutrition}</p>
+        </details>
+        <details>
+          <summary>Allergens</summary>
+          <p>${product.allergens}</p>
+        </details>
+        <details>
+          <summary>Storage</summary>
+          <p>${product.storage}</p>
+        </details>
       </div>
     `;
     setupReveal(productDetail);
