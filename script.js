@@ -48,8 +48,8 @@ const PRODUCTS = [
     nutrition: 'Approx. 140 kcal · 5g protein · 9g sugar (from dates only) per bite.',
     allergens: 'Contains tree nuts (almonds). Made in a kitchen that also handles peanuts, pistachios and walnuts.',
     storage: 'Store in a cool, dry place. Keeps fresh up to 2 weeks at room temperature, or a month refrigerated.',
-    oldPrice: 70,
-    price: 49
+    oldPrice: 55,
+    price: 39
   },
   {
     id: 'Lemon-Coconut',
@@ -217,7 +217,7 @@ if (productGrid) {
     setInterval(() => {
       shown = !shown;
       swap.classList.toggle('is-active', shown);
-    }, 3000);
+    }, 4500);
   });
 }
 //<div class="ball ball-card flavor-matcha" aria-hidden="true"></div>
