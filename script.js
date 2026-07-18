@@ -56,6 +56,7 @@ const PRODUCTS = [
     name: 'Lemon Coconut Bite x10',
     flavor: 'flavor-lemon',
     image: 'images/Lemon-Coconut-Bite.png',
+    image2: 'images/Lemon-Coconut-Bite.png',
     ingredients: 'lemon · cashews · coconut',
     tagline: 'Creamy cashews and sweet Medjool dates, brightened with fresh lemon and coconut flakes.',
     description: 'Rich cashews and sweet dates create a filling bite, balanced with zesty lemon and a delicate coconut finish.',
