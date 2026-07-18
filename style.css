@@ -567,6 +567,70 @@ section{ padding:88px 24px; }
 .product-swap.is-active .product-photo:not(.swap-in){
   transform:translateX(-100%);
 }
+
+/* Bigger swap wrapper for the product detail page */
+.detail-visual{
+  padding-bottom:44px;
+}
+.detail-visual .product-swap.detail-swap{
+  position:absolute;
+  left:10%;
+  top:5%;
+  width:220px;
+  height:220px;
+  margin:0;
+}
+
+/* Left / right arrows for manual control on the detail page */
+.swap-arrow{
+  position:absolute;
+  top:calc(5% + 110px);
+  transform:translateY(-50%);
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  border:none;
+  background:rgba(0,0,0,0.55);
+  color:#fff;
+  font-size:1.4rem;
+  line-height:1;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:2;
+  transition:background 0.2s ease;
+  pointer-events:auto;
+}
+.swap-arrow:hover{ background:rgba(0,0,0,0.8); }
+.swap-arrow-left{ left:calc(10% - 46px); }
+.swap-arrow-right{ left:calc(10% + 220px + 6px); }
+
+/* Dot indicators under the detail-page image */
+.swap-dots{
+  position:absolute;
+  bottom:0;
+  left:10%;
+  width:220px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+}
+.swap-dot{
+  width:10px;
+  height:10px;
+  padding:0;
+  border:none;
+  border-radius:50%;
+  background:rgba(50,47,46,0.25);
+  cursor:pointer;
+  transition:background 0.2s ease, transform 0.2s ease;
+}
+.swap-dot:hover{ background:rgba(50,47,46,0.5); }
+.swap-dot.is-active{
+  background:var(--charcoal);
+  transform:scale(1.25);
+}
 .hero-visual .product-photo{ position:absolute; }
 
 .detail-visual.has-photo{

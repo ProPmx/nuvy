@@ -214,7 +214,7 @@ if (productGrid) {
     setInterval(() => {
       shown = !shown;
       swap.classList.toggle('is-active', shown);
-    }, 5000);
+    }, 3000);
   });
 }
 //<div class="ball ball-card flavor-matcha" aria-hidden="true"></div>
@@ -242,11 +242,22 @@ if (productDetail) {
 
     productDetail.innerHTML = `
       <div class="detail-visual reveal" aria-hidden="true">
-        ${product.image
-          ? `<img src="${product.image}" alt="${product.name}" class="product-photo ball-xl" style="position:absolute; left:10%; top:5%;">`
-          : `<div class="ball ball-xl ${product.flavor}" style="--x:18%; --y:8%;"></div>
-             <div class="ball ball-md2 ${product.flavor}" style="--x:55%; --y:38%;"></div>
-             <div class="ball ball-sm2 ${product.flavor}" style="--x:8%; --y:55%;"></div>`}
+        ${product.image2
+          ? `<div class="product-swap detail-swap">
+               <img src="${product.image}" alt="${product.name}" class="product-photo ball-xl">
+               <img src="${product.image2}" alt="${product.name}" class="product-photo ball-xl swap-in">
+             </div>
+             <button type="button" class="swap-arrow swap-arrow-left" aria-label="Show first photo">&#8249;</button>
+             <button type="button" class="swap-arrow swap-arrow-right" aria-label="Show second photo">&#8250;</button>
+             <div class="swap-dots">
+               <button type="button" class="swap-dot is-active" aria-label="Show first photo"></button>
+               <button type="button" class="swap-dot" aria-label="Show second photo"></button>
+             </div>`
+          : product.image
+            ? `<img src="${product.image}" alt="${product.name}" class="product-photo ball-xl" style="position:absolute; left:10%; top:5%;">`
+            : `<div class="ball ball-xl ${product.flavor}" style="--x:18%; --y:8%;"></div>
+               <div class="ball ball-md2 ${product.flavor}" style="--x:55%; --y:38%;"></div>
+               <div class="ball ball-sm2 ${product.flavor}" style="--x:8%; --y:55%;"></div>`}
       </div>
       <div class="detail-info reveal">
         <p class="stamp-tag">${product.ingredients}</p>
@@ -292,6 +303,24 @@ if (productDetail) {
       </div>
     `;
     setupReveal(productDetail);
+
+    const detailSwap = productDetail.querySelector('.detail-swap');
+    if (detailSwap) {
+      const leftArrow = productDetail.querySelector('.swap-arrow-left');
+      const rightArrow = productDetail.querySelector('.swap-arrow-right');
+      const dots = productDetail.querySelectorAll('.swap-dot');
+      let swapShown = false;
+
+      function setSwapShown(value) {
+        swapShown = value;
+        detailSwap.classList.toggle('is-active', swapShown);
+        dots.forEach((dot, i) => dot.classList.toggle('is-active', (i === 1) === swapShown));
+      }
+
+      if (leftArrow) leftArrow.addEventListener('click', () => setSwapShown(false));
+      if (rightArrow) rightArrow.addEventListener('click', () => setSwapShown(true));
+      dots.forEach((dot, i) => dot.addEventListener('click', () => setSwapShown(i === 1)));
+    }
 
     let qty = 1;
     const MIN_QTY = 1;
