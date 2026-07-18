@@ -8,13 +8,15 @@ const WHATSAPP_NUMBER = '212675535823';
 
 // The message sent to you on WhatsApp when someone orders.
 // {qty}, {name}, {unitPrice} and {total} get filled in automatically.
-function buildOrderMessage(qty, name, unitPrice, total) {
+function buildOrderMessage(qty, name, unitPrice, total, location, deliveryFee) {
   return `Hello NUVY ,
 I would like to place the following order:
 
 Flavor: ${name}
 Quantity: ${qty}
 Price per box: ${unitPrice} DH
+Delivery location: ${location || 'Not specified'}
+Delivery fee: ${deliveryFee || 0} DH
 ==================================
 *Total: ${total} DH*
 
@@ -282,6 +284,29 @@ if (productDetail) {
         <a href="#" id="orderBtn" class="btn btn-primary btn-large" target="_blank" rel="noopener">Order on WhatsApp</a>
         <p class="order-note">You'll be taken to WhatsApp with your order pre-written. We'll reply with payment details.</p>
 
+        <div class="delivery-select">
+          <p class="delivery-label">Where are you ordering from?</p>
+          <p class="delivery-error" id="deliveryError" style="display:none;">⚠ Please select where you're ordering from</p>
+          <div class="delivery-options">
+            <button type="button" class="delivery-option" id="deliveryMarrakech">Marrakech <span>(+15 DH)</span></button>
+            <button type="button" class="delivery-option" id="deliveryOther">Outside Marrakech <span>(+30 DH)</span></button>
+          </div>
+          <select id="citySelect" class="city-select" style="display:none;">
+            <option value="">Select your city</option>
+            <option value="Casablanca">Casablanca</option>
+            <option value="Rabat">Rabat</option>
+            <option value="Fès">Fès</option>
+            <option value="Tanger">Tanger</option>
+            <option value="Agadir">Agadir</option>
+            <option value="Meknès">Meknès</option>
+            <option value="Oujda">Oujda</option>
+            <option value="Kénitra">Kénitra</option>
+            <option value="Tétouan">Tétouan</option>
+            <option value="Safi">Safi</option>
+            <option value="Other">Other city</option>
+          </select>
+        </div>
+
         <div class="product-extra">
           <details>
             <summary>Full ingredients</summary>
@@ -325,16 +350,22 @@ if (productDetail) {
     let qty = 1;
     const MIN_QTY = 1;
     const MAX_QTY = 20;
+    let deliveryFee = 0;
+    let deliveryLocation = '';
 
     const qtyValueEl = document.getElementById('qtyValue');
     const totalPriceEl = document.getElementById('totalPrice');
     const orderBtn = document.getElementById('orderBtn');
+    const deliveryMarrakechBtn = document.getElementById('deliveryMarrakech');
+    const deliveryOtherBtn = document.getElementById('deliveryOther');
+    const citySelect = document.getElementById('citySelect');
+    const deliveryErrorEl = document.getElementById('deliveryError');
 
     function refresh() {
-      const total = qty * product.price;
+      const total = qty * product.price + deliveryFee;
       qtyValueEl.textContent = qty;
       totalPriceEl.textContent = `${total} DH`;
-      const message = buildOrderMessage(qty, product.name, product.price, total);
+      const message = buildOrderMessage(qty, product.name, product.price, total, deliveryLocation, deliveryFee);
       orderBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     }
 
@@ -345,10 +376,42 @@ if (productDetail) {
       if (qty < MAX_QTY) { qty++; refresh(); }
     });
 
+    deliveryMarrakechBtn.addEventListener('click', () => {
+      deliveryFee = 15;
+      deliveryLocation = 'Marrakech';
+      deliveryMarrakechBtn.classList.add('is-active');
+      deliveryOtherBtn.classList.remove('is-active');
+      citySelect.style.display = 'none';
+      citySelect.value = '';
+      deliveryErrorEl.style.display = 'none';
+      refresh();
+    });
+
+    deliveryOtherBtn.addEventListener('click', () => {
+      deliveryFee = 30;
+      deliveryLocation = citySelect.value || '';
+      deliveryOtherBtn.classList.add('is-active');
+      deliveryMarrakechBtn.classList.remove('is-active');
+      citySelect.style.display = 'block';
+      if (deliveryLocation) deliveryErrorEl.style.display = 'none';
+      refresh();
+    });
+
+    citySelect.addEventListener('change', () => {
+      deliveryLocation = citySelect.value;
+      if (deliveryLocation) deliveryErrorEl.style.display = 'none';
+      refresh();
+    });
+
     orderBtn.addEventListener('click', (e) => {
       if (isPlaceholderNumber()) {
         e.preventDefault();
         showToast('Add your real WhatsApp number to WHATSAPP_NUMBER in script.js to enable ordering.');
+        return;
+      }
+      if (!deliveryLocation) {
+        e.preventDefault();
+        deliveryErrorEl.style.display = 'block';
       }
     });
 
