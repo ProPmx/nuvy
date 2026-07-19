@@ -462,7 +462,7 @@ section{ padding:88px 24px; }
 }
 .detail-visual{ position:relative; height:340px; }
 .detail-visual .ball{ position:absolute; left:var(--x); top:var(--y); }
-.ball-xl{ width:220px; height:220px; }
+.ball-xl{ width:260px; height:260px; }
 .ball-md2{ width:140px; height:140px; }
 .ball-sm2{ width:96px; height:96px; }
 
@@ -622,8 +622,8 @@ section{ padding:88px 24px; }
 .product-card .product-photo.ball-card{ margin:0 auto 18px; }
 .product-swap{
   position:relative;
-  width:130px;
-  height:130px;
+  width:140px;
+  height:140px;
   margin:0 auto 18px;
   border-radius:50%;
   overflow:hidden;
