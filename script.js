@@ -48,26 +48,26 @@ const PRODUCTS = [
     nutrition: 'Approx. 140 kcal · 5g protein · 9g sugar (from dates only) per bite.',
     allergens: 'Contains tree nuts (almonds). Made in a kitchen that also handles peanuts, pistachios and walnuts.',
     storage: 'Store in a cool, dry place. Keeps fresh up to 2 weeks at room temperature, or a month refrigerated.',
-    oldPrice: 55,
+    oldPrice: 38,
     price: 29
   },
-  {
-    id: 'Lemon-Coconut',
-    name: 'Lemon Coconut Bite x10',
-    flavor: 'flavor-lemon',
-    image: 'images/Lemon-Coconut-Bite.png',
-    image2: 'images/Lemon-Coconut-Bite.png',
-    ingredients: 'lemon · cashews · coconut',
-    tagline: 'Creamy cashews and sweet Medjool dates, brightened with fresh lemon and coconut flakes.',
-    description: 'Rich cashews and sweet dates create a filling bite, balanced with zesty lemon and a delicate coconut finish.',
-    unitNote: 'Each box holds about 10 hand-rolled bites.',
-    fullIngredients: 'lemon and coconut flakes, peanut butter, vanilla, a pinch of sea salt.',
-    nutrition: '# Approx. 150 kcal · 6g protein · 7g sugar per bite.',
-    allergens: 'Contains peanuts. Made in a kitchen that also handles tree nuts.',
-    storage: 'Store in a cool, dry place. Keeps fresh up to 2 weeks at room temperature, or a month refrigerated.',
-    oldPrice: 129,
-    price: 67
-  }
+  // {
+  //   id: 'Lemon-Coconut',
+  //   name: 'Lemon Coconut Bite x10',
+  //   flavor: 'flavor-lemon',
+  //   image: 'images/Lemon-Coconut-Bite.png',
+  //   image2: 'images/Lemon-Coconut-Bite.png',
+  //   ingredients: 'lemon · cashews · coconut',
+  //   tagline: 'Creamy cashews and sweet Medjool dates, brightened with fresh lemon and coconut flakes.',
+  //   description: 'Rich cashews and sweet dates create a filling bite, balanced with zesty lemon and a delicate coconut finish.',
+  //   unitNote: 'Each box holds about 10 hand-rolled bites.',
+  //   fullIngredients: 'lemon and coconut flakes, peanut butter, vanilla, a pinch of sea salt.',
+  //   nutrition: '# Approx. 150 kcal · 6g protein · 7g sugar per bite.',
+  //   allergens: 'Contains peanuts. Made in a kitchen that also handles tree nuts.',
+  //   storage: 'Store in a cool, dry place. Keeps fresh up to 2 weeks at room temperature, or a month refrigerated.',
+  //   oldPrice: 129,
+  //   price: 67
+  // }
   // {
   //   id: 'coconut-lime',
   //   name: 'Coconut Lime Refresher x10',
@@ -289,7 +289,7 @@ if (productDetail) {
           <p class="delivery-label">Where are you ordering from?</p>
           <p class="delivery-error" id="deliveryError" style="display:none;">⚠ Please select where you're ordering from</p>
           <div class="delivery-options">
-            <button type="button" class="delivery-option" id="deliveryMarrakech">Marrakech <span>(+15 DH)</span></button>
+            <button type="button" class="delivery-option" id="deliveryMarrakech">Marrakech <span>(+18 DH)</span></button>
             <button type="button" class="delivery-option" id="deliveryOther">Outside Marrakech <span>(+30 DH)</span></button>
           </div>
           <select id="citySelect" class="city-select" style="display:none;">
